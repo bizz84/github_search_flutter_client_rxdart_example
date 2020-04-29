@@ -1,0 +1,4 @@
+
+
+GET https://api.github.com/search/users?q=bizz84
+Accept: application/json
