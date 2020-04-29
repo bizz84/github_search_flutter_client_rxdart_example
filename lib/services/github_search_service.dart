@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/services/github_search_api_wrapper.dart';
 import 'package:rxdart/rxdart.dart';
 

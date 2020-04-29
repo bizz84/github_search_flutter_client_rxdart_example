@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
 import 'package:github_search_flutter_client_rxdart_example/services/github_search_api_wrapper.dart';
 import 'package:github_search_flutter_client_rxdart_example/services/github_search_service.dart';
@@ -51,26 +52,23 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
       builder: (context, AsyncSnapshot<GitHubSearchResult> snapshot) {
         if (snapshot.hasData) {
           final GitHubSearchResult result = snapshot.data;
-          if (result.error != null) {
-            return SearchPlaceholder(title: errorMessages[result.error]);
-          }
-          if (result.users.isEmpty) {
-            return SearchPlaceholder(title: 'No results');
-          }
-          return GridView.builder(
-            itemCount: result.users.length,
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.8,
+          return result.when(
+            (users) => GridView.builder(
+              itemCount: users.length,
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (context, index) {
+                return GitHubUserSearchResultTile(
+                  user: users[index],
+                  onSelected: (value) => close(context, value),
+                );
+              },
             ),
-            itemBuilder: (context, index) {
-              return GitHubUserSearchResultTile(
-                user: result.users[index],
-                onSelected: (value) => close(context, value),
-              );
-            },
+            error: (error) => SearchPlaceholder(title: errorMessages[error]),
           );
         } else {
           return Center(child: CircularProgressIndicator());
