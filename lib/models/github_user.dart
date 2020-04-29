@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+// TODO: Convert to use freezed
 class GitHubUser {
   GitHubUser(
       {@required this.login, @required this.avatarUrl, @required this.htmlUrl});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
-import 'package:github_search_flutter_client_rxdart_example/services/github_search_api_wrapper.dart';
 import 'package:github_search_flutter_client_rxdart_example/services/github_search_service.dart';
 
 class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
