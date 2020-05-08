@@ -1,17 +1,19 @@
 # GitHub user search API: Flutter & RxDart example
 
-TODO
-- [ ] Write an APIService to get data from the API
-- [ ] Implement `SearchDelegate` 
-- [ ] Add search functionality with RxDart
-- Freezed API modeling
+Simple app using the Flutter [`SearchDelegate`](https://api.flutter.dev/flutter/material/SearchDelegate-class.html) class to show a list of users matching the input search query:
 
-Document packages to be installed in `pubspec.yaml`
-Then run
+![](images/github-search-flutter-screenshot.png)
 
-flutter pub run build_runner build
+The app uses `switchMap` & `debounce` from RxDart for a good user experience, without putting too much load on the server, or compromising bandwidth and battery life on the client.
 
-Issues: not generating the correct data!
+Simple architecture diagram:
 
+![](images/github-search-diagram.png)
 
-https://github.com/rrousselGit/freezed/issues/29#issuecomment-585779579
+- `GitHubSearchAPIWrapper`: pulls the data from the GitHub REST API
+- `GitHubSearchResult`: contains the API response data
+- `GitHubSearchDelegate`: shows the search UI with a grid of results
+- `GitHubSearchService`: holds the logic for wiring up the API wrapper with the UI
+
+### [LICENSE: MIT](LICENSE.md)
+
