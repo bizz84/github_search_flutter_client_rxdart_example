@@ -12,7 +12,7 @@ class GitHubSearchAPIWrapper {
         queryParameters: {'q': username},
       );
 
-  Future<GitHubSearchResult> searchUsername(String username) async {
+  Future<GitHubSearchResult> searchUser(String username) async {
     final uri = searchUsernameUri(username);
     final response = await http.get(uri);
     if (response.statusCode == 200) {

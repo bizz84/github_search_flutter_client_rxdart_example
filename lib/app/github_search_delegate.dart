@@ -25,7 +25,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
       return Container();
     }
     // search-as-you-type if enabled
-    searchService.searchUsername(query);
+    searchService.searchUser(query);
     return buildMatchingSuggestions(context);
   }
 
@@ -35,7 +35,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
       return Container();
     }
     // always search if submitted
-    searchService.searchUsername(query);
+    searchService.searchUser(query);
     return buildMatchingSuggestions(context);
   }
 

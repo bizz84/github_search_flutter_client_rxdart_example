@@ -25,12 +25,14 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   void _showSearch(BuildContext context) async {
+    final searchService =
+        GitHubSearchService(apiWrapper: GitHubSearchAPIWrapper());
     final user = await showSearch<GitHubUser>(
       context: context,
-      delegate: GitHubSearchDelegate(
-        GitHubSearchService(apiWrapper: GitHubSearchAPIWrapper()),
-      ),
+      delegate: GitHubSearchDelegate(searchService),
     );
+    searchService.dispose();
+    print(user);
   }
 
   @override
