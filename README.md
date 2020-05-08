@@ -1,4 +1,4 @@
-# GitHub user search API: Flutter & RxDart example
+# Example GitHub Search app built in Flutter & RxDart
 
 Simple app using the Flutter [`SearchDelegate`](https://api.flutter.dev/flutter/material/SearchDelegate-class.html) class to show a list of users matching the input search query:
 
