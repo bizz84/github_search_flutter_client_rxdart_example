@@ -15,5 +15,15 @@ Simple architecture diagram:
 - `GitHubSearchDelegate`: shows the search UI with a grid of results
 - `GitHubSearchService`: holds the logic for wiring up the API wrapper with the UI
 
+### Written tutorial here
+
+- [RxDart by example: querying the GitHub Search API with switchMap & debounce](https://codewithandrea.com/videos/2020-05-11-rxdart-by-example-github-search/)
+
+### Credits
+
+This tutorial was heavily inspired by this talk by Brian Egan & Filip Hracek at ReactiveConf 2018:
+
+- [ReactiveConf 2018 - Brian Egan & Filip Hracek: Practical Rx with Flutter](https://youtu.be/7O1UO5rEpRc)
+
 ### [LICENSE: MIT](LICENSE.md)
 
