@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'github_user.dart';
 
 part 'github_search_result.freezed.dart';
