@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
-import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/github_search_result.dart';
+import '../models/github_user.dart';
 
 class GitHubSearchAPIWrapper {
   Uri searchUsernameUri(String username) => Uri(
