@@ -96,8 +96,8 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
 
 class GitHubUserSearchResultTile extends StatelessWidget {
   const GitHubUserSearchResultTile(
-      {required this.user, required this.onSelected});
-
+      {Key? key, required this.user, required this.onSelected})
+      : super(key: key);
   final GitHubUser user;
   final ValueChanged<GitHubUser> onSelected;
 
@@ -131,7 +131,7 @@ class GitHubUserSearchResultTile extends StatelessWidget {
 }
 
 class SearchPlaceholder extends StatelessWidget {
-  const SearchPlaceholder({required this.title});
+  const SearchPlaceholder({Key? key, required this.title}) : super(key: key);
   final String title;
   @override
   Widget build(BuildContext context) {

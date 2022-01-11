@@ -13,7 +13,6 @@ class GitHubSearchService {
     _results = _searchTerms
         .debounce((_) => TimerStream(true, const Duration(milliseconds: 500)))
         .switchMap((query) async* {
-      print('searching: $query');
       yield await searchRepository.searchUser(query);
     }); // discard previous events
   }
