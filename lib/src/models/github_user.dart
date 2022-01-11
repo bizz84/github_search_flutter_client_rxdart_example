@@ -1,18 +1,14 @@
-import 'package:flutter/foundation.dart';
-
-// TODO: Convert to use freezed
 class GitHubUser {
-  GitHubUser(
-      {required this.login, required this.avatarUrl, required this.htmlUrl});
-
+  const GitHubUser({
+    required this.login,
+    required this.avatarUrl,
+    required this.htmlUrl,
+  });
   final String login;
   final String avatarUrl;
   final String htmlUrl;
 
   factory GitHubUser.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
-      throw UnsupportedError('json is null');
-    }
     final login = json['login'];
     if (login != null) {
       final avatarUrl = json['avatar_url'];
@@ -25,6 +21,9 @@ class GitHubUser {
     }
     throw UnsupportedError('login is null');
   }
+
+  @override
+  String toString() => 'username: $login';
 
   /* Sample response data for a given user
   {
@@ -50,6 +49,4 @@ class GitHubUser {
     }
     */
 
-  @override
-  String toString() => 'username: $login';
 }

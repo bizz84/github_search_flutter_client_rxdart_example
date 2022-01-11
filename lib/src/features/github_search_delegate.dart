@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
-import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
-import 'package:github_search_flutter_client_rxdart_example/services/github_search_service.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/models/github_search_result.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/models/github_user.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/services/github_search_service.dart';
 
 class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
   GitHubSearchDelegate(this.searchService);
@@ -54,7 +55,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
           return result.when(
             (users) => GridView.builder(
               itemCount: users.length,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
@@ -70,7 +71,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
             error: (error) => SearchPlaceholder(title: errorMessages[error]!),
           );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
@@ -95,8 +96,8 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
 
 class GitHubUserSearchResultTile extends StatelessWidget {
   const GitHubUserSearchResultTile(
-      {required this.user, required this.onSelected});
-
+      {Key? key, required this.user, required this.onSelected})
+      : super(key: key);
   final GitHubUser user;
   final ValueChanged<GitHubUser> onSelected;
 
@@ -108,18 +109,16 @@ class GitHubUserSearchResultTile extends StatelessWidget {
       child: Column(
         children: [
           ClipPath(
-            clipper: ShapeBorderClipper(
+            clipper: const ShapeBorderClipper(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            child: Container(
-              child: Image.network(
-                user.avatarUrl,
-              ),
+            child: CachedNetworkImage(
+              imageUrl: user.avatarUrl,
             ),
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Text(
             user.login,
             style: theme.textTheme.headline6,
@@ -132,7 +131,7 @@ class GitHubUserSearchResultTile extends StatelessWidget {
 }
 
 class SearchPlaceholder extends StatelessWidget {
-  const SearchPlaceholder({required this.title});
+  const SearchPlaceholder({Key? key, required this.title}) : super(key: key);
   final String title;
   @override
   Widget build(BuildContext context) {
