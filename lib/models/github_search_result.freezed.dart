@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'github_search_result.dart';
 
@@ -9,6 +11,10 @@ part of 'github_search_result.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
 class _$GitHubSearchResultTearOff {
   const _$GitHubSearchResultTearOff();
 
@@ -25,40 +31,59 @@ class _$GitHubSearchResultTearOff {
   }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $GitHubSearchResult = _$GitHubSearchResultTearOff();
 
+/// @nodoc
 mixin _$GitHubSearchResult {
   @optionalTypeArgs
-  Result when<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    @required Result error(GitHubAPIError error),
-  });
+  TResult when<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user) $default, {
+    required TResult Function(GitHubAPIError error) error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    Result error(GitHubAPIError error),
-    @required Result orElse(),
-  });
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>(
-    Result $default(Data value), {
-    @required Result error(Error value),
-  });
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>(
-    Result $default(Data value), {
-    Result error(Error value),
-    @required Result orElse(),
-  });
+  TResult map<TResult extends Object?>(
+    TResult Function(Data value) $default, {
+    required TResult Function(Error value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $GitHubSearchResultCopyWith<$Res> {
   factory $GitHubSearchResultCopyWith(
           GitHubSearchResult value, $Res Function(GitHubSearchResult) then) =
       _$GitHubSearchResultCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$GitHubSearchResultCopyWithImpl<$Res>
     implements $GitHubSearchResultCopyWith<$Res> {
   _$GitHubSearchResultCopyWithImpl(this._value, this._then);
@@ -68,12 +93,14 @@ class _$GitHubSearchResultCopyWithImpl<$Res>
   final $Res Function(GitHubSearchResult) _then;
 }
 
+/// @nodoc
 abstract class $DataCopyWith<$Res> {
   factory $DataCopyWith(Data value, $Res Function(Data) then) =
       _$DataCopyWithImpl<$Res>;
   $Res call({List<GitHubUser> user});
 }
 
+/// @nodoc
 class _$DataCopyWithImpl<$Res> extends _$GitHubSearchResultCopyWithImpl<$Res>
     implements $DataCopyWith<$Res> {
   _$DataCopyWithImpl(Data _value, $Res Function(Data) _then)
@@ -84,16 +111,21 @@ class _$DataCopyWithImpl<$Res> extends _$GitHubSearchResultCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object user = freezed,
+    Object? user = freezed,
   }) {
     return _then(Data(
-      user == freezed ? _value.user : user as List<GitHubUser>,
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as List<GitHubUser>,
     ));
   }
 }
 
+/// @nodoc
+
 class _$Data implements Data {
-  const _$Data(this.user) : assert(user != null);
+  const _$Data(this.user);
 
   @override
   final List<GitHubUser> user;
@@ -106,38 +138,45 @@ class _$Data implements Data {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Data &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
+        (other.runtimeType == runtimeType &&
+            other is Data &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
+  @JsonKey(ignore: true)
   @override
   $DataCopyWith<Data> get copyWith =>
       _$DataCopyWithImpl<Data>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    @required Result error(GitHubAPIError error),
+  TResult when<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user) $default, {
+    required TResult Function(GitHubAPIError error) error,
   }) {
-    assert($default != null);
-    assert(error != null);
     return $default(user);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    Result error(GitHubAPIError error),
-    @required Result orElse(),
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
   }) {
-    assert(orElse != null);
+    return $default?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
+    required TResult orElse(),
+  }) {
     if ($default != null) {
       return $default(user);
     }
@@ -146,23 +185,29 @@ class _$Data implements Data {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>(
-    Result $default(Data value), {
-    @required Result error(Error value),
+  TResult map<TResult extends Object?>(
+    TResult Function(Data value) $default, {
+    required TResult Function(Error value) error,
   }) {
-    assert($default != null);
-    assert(error != null);
     return $default(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>(
-    Result $default(Data value), {
-    Result error(Error value),
-    @required Result orElse(),
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
   }) {
-    assert(orElse != null);
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
     if ($default != null) {
       return $default(this);
     }
@@ -174,15 +219,18 @@ abstract class Data implements GitHubSearchResult {
   const factory Data(List<GitHubUser> user) = _$Data;
 
   List<GitHubUser> get user;
-  $DataCopyWith<Data> get copyWith;
+  @JsonKey(ignore: true)
+  $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
   $Res call({GitHubAPIError error});
 }
 
+/// @nodoc
 class _$ErrorCopyWithImpl<$Res> extends _$GitHubSearchResultCopyWithImpl<$Res>
     implements $ErrorCopyWith<$Res> {
   _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
@@ -193,16 +241,21 @@ class _$ErrorCopyWithImpl<$Res> extends _$GitHubSearchResultCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
+    Object? error = freezed,
   }) {
     return _then(Error(
-      error == freezed ? _value.error : error as GitHubAPIError,
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as GitHubAPIError,
     ));
   }
 }
 
+/// @nodoc
+
 class _$Error implements Error {
-  const _$Error(this.error) : assert(error != null);
+  const _$Error(this.error);
 
   @override
   final GitHubAPIError error;
@@ -215,38 +268,45 @@ class _$Error implements Error {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Error &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
+        (other.runtimeType == runtimeType &&
+            other is Error &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
 
+  @JsonKey(ignore: true)
   @override
   $ErrorCopyWith<Error> get copyWith =>
       _$ErrorCopyWithImpl<Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    @required Result error(GitHubAPIError error),
+  TResult when<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user) $default, {
+    required TResult Function(GitHubAPIError error) error,
   }) {
-    assert($default != null);
-    assert(error != null);
     return error(this.error);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>(
-    Result $default(List<GitHubUser> user), {
-    Result error(GitHubAPIError error),
-    @required Result orElse(),
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
   }) {
-    assert(orElse != null);
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<GitHubUser> user)? $default, {
+    TResult Function(GitHubAPIError error)? error,
+    required TResult orElse(),
+  }) {
     if (error != null) {
       return error(this.error);
     }
@@ -255,23 +315,29 @@ class _$Error implements Error {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>(
-    Result $default(Data value), {
-    @required Result error(Error value),
+  TResult map<TResult extends Object?>(
+    TResult Function(Data value) $default, {
+    required TResult Function(Error value) error,
   }) {
-    assert($default != null);
-    assert(error != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>(
-    Result $default(Data value), {
-    Result error(Error value),
-    @required Result orElse(),
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
   }) {
-    assert(orElse != null);
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(Data value)? $default, {
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
     if (error != null) {
       return error(this);
     }
@@ -283,5 +349,6 @@ abstract class Error implements GitHubSearchResult {
   const factory Error(GitHubAPIError error) = _$Error;
 
   GitHubAPIError get error;
-  $ErrorCopyWith<Error> get copyWith;
+  @JsonKey(ignore: true)
+  $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }
