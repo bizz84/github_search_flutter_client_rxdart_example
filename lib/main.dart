@@ -29,14 +29,13 @@ class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   void _showSearch(BuildContext context, WidgetRef ref) async {
-    //final searchRepository = ref.read(searchRepositoryProvider);
-    //final service = GitHubSearchService(searchRepository: searchRepository);
     final service = ref.read(searchServiceProvider);
     final searchDelegate = GitHubSearchDelegate(service);
     final user = await showSearch<GitHubUser?>(
       context: context,
       delegate: searchDelegate,
     );
+    // TODO: Service is now reused for the next search so it shouldn't be disposed
     //service.dispose();
     if (user != null) {
       showDialog(
