@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
   void _showSearch(BuildContext context) async {
     final searchService =
         GitHubSearchService(apiWrapper: GitHubSearchAPIWrapper());
-    final user = await showSearch<GitHubUser>(
+    final user = await showSearch<GitHubUser?>(
       context: context,
       delegate: GitHubSearchDelegate(searchService),
     );
@@ -42,13 +42,16 @@ class HomePage extends StatelessWidget {
         title: Text('GitHub Search'),
       ),
       body: Center(
-        child: RaisedButton(
-          color: Theme.of(context).primaryColor,
-          child: Text('Search',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .copyWith(color: Colors.white)),
+        child: ElevatedButton(
+          style:
+              ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
+          child: Text(
+            'Search',
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(color: Colors.white),
+          ),
           onPressed: () => _showSearch(context),
         ),
       ),

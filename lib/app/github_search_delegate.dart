@@ -3,7 +3,7 @@ import 'package:github_search_flutter_client_rxdart_example/models/github_search
 import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
 import 'package:github_search_flutter_client_rxdart_example/services/github_search_service.dart';
 
-class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
+class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
   GitHubSearchDelegate(this.searchService);
   final GitHubSearchService searchService;
 
@@ -50,7 +50,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
       stream: searchService.results,
       builder: (context, AsyncSnapshot<GitHubSearchResult> snapshot) {
         if (snapshot.hasData) {
-          final GitHubSearchResult result = snapshot.data;
+          final GitHubSearchResult result = snapshot.data!;
           return result.when(
             (users) => GridView.builder(
               itemCount: users.length,
@@ -67,7 +67,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
                 );
               },
             ),
-            error: (error) => SearchPlaceholder(title: errorMessages[error]),
+            error: (error) => SearchPlaceholder(title: errorMessages[error]!),
           );
         } else {
           return Center(child: CircularProgressIndicator());
@@ -95,7 +95,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser> {
 
 class GitHubUserSearchResultTile extends StatelessWidget {
   const GitHubUserSearchResultTile(
-      {@required this.user, @required this.onSelected});
+      {required this.user, required this.onSelected});
 
   final GitHubUser user;
   final ValueChanged<GitHubUser> onSelected;
@@ -132,7 +132,7 @@ class GitHubUserSearchResultTile extends StatelessWidget {
 }
 
 class SearchPlaceholder extends StatelessWidget {
-  const SearchPlaceholder({@required this.title});
+  const SearchPlaceholder({required this.title});
   final String title;
   @override
   Widget build(BuildContext context) {

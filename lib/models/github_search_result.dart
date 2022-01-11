@@ -6,7 +6,7 @@ part 'github_search_result.freezed.dart';
 enum GitHubAPIError { rateLimitExceeded, parseError, unknownError }
 
 @freezed
-abstract class GitHubSearchResult with _$GitHubSearchResult {
+class GitHubSearchResult with _$GitHubSearchResult {
   const factory GitHubSearchResult(List<GitHubUser> user) = Data;
   const factory GitHubSearchResult.error(GitHubAPIError error) = Error;
 }

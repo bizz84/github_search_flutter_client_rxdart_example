@@ -18,7 +18,7 @@ class GitHubSearchAPIWrapper {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<dynamic> items = data['items'];
-      if (items?.isNotEmpty ?? false) {
+      if (items.isNotEmpty) {
         final users = items.map((item) => GitHubUser.fromJson(item)).toList();
         return GitHubSearchResult(users);
       }
