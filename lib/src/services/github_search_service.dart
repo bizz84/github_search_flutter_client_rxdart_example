@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/repositories/github_search_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -30,3 +31,14 @@ class GitHubSearchService {
     _searchTerms.close();
   }
 }
+
+final searchServiceProvider = Provider<GitHubSearchService>((ref) {
+  final repository = ref.watch(searchRepositoryProvider);
+  return GitHubSearchService(searchRepository: repository);
+});
+
+final searchResultsProvider =
+    StreamProvider.autoDispose<GitHubSearchResult>((ref) {
+  final service = ref.watch(searchServiceProvider);
+  return service.results;
+});

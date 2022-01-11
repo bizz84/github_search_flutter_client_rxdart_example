@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/features/github_search_delegate.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/models/github_user.dart';
-import 'package:github_search_flutter_client_rxdart_example/src/repositories/github_search_repository.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/services/github_search_service.dart';
 
 void main() {
@@ -30,13 +29,14 @@ class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   void _showSearch(BuildContext context, WidgetRef ref) async {
-    final searchRepository = ref.read(searchRepositoryProvider);
-    final service = GitHubSearchService(searchRepository: searchRepository);
+    final service = ref.read(searchServiceProvider);
+    final searchDelegate = GitHubSearchDelegate(service);
     final user = await showSearch<GitHubUser?>(
       context: context,
-      delegate: GitHubSearchDelegate(service),
+      delegate: searchDelegate,
     );
-    service.dispose();
+    // TODO: Service is now reused for the next search so it shouldn't be disposed
+    //service.dispose();
     if (user != null) {
       showDialog(
         context: context,
