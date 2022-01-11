@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
-import 'package:github_search_flutter_client_rxdart_example/repositories/github_search_repository.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/models/github_search_result.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/repositories/github_search_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum APIError { rateLimitExceeded }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_flutter_client_rxdart_example/app/github_search_delegate.dart';
-import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
-import 'package:github_search_flutter_client_rxdart_example/repositories/github_search_repository.dart';
-import 'package:github_search_flutter_client_rxdart_example/services/github_search_service.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/features/github_search_delegate.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/models/github_user.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/repositories/github_search_repository.dart';
+import 'package:github_search_flutter_client_rxdart_example/src/services/github_search_service.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -37,7 +37,20 @@ class HomePage extends ConsumerWidget {
       delegate: GitHubSearchDelegate(service),
     );
     service.dispose();
-    print(user);
+    if (user != null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Selected user: ${user.login}'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
