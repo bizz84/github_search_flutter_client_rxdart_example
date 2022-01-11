@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/models/github_user.dart';
 import 'package:github_search_flutter_client_rxdart_example/src/services/github_search_service.dart';
 
 class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
-  GitHubSearchDelegate(this.searchService);
-  final GitHubSearchService searchService;
+  GitHubSearchDelegate(this.ref);
+  final WidgetRef ref;
 
   @override
   Widget buildLeading(BuildContext context) {
@@ -26,7 +27,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
       return Container();
     }
     // search-as-you-type if enabled
-    searchService.searchUser(query);
+    ref.read(searchServiceProvider).searchUser(query);
     return buildMatchingSuggestions(context);
   }
 
@@ -36,7 +37,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
       return Container();
     }
     // always search if submitted
-    searchService.searchUser(query);
+    ref.read(searchServiceProvider).searchUser(query);
     return buildMatchingSuggestions(context);
   }
 
@@ -46,12 +47,12 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
       GitHubAPIError.rateLimitExceeded: 'Rate limit exceeded',
       GitHubAPIError.unknownError: 'Unknown error',
     };
-    // then return results
     return StreamBuilder<GitHubSearchResult>(
-      stream: searchService.results,
+      stream: ref.read(searchServiceProvider).results,
       builder: (context, AsyncSnapshot<GitHubSearchResult> snapshot) {
         if (snapshot.hasData) {
           final GitHubSearchResult result = snapshot.data!;
+
           return result.when(
             (users) => GridView.builder(
               itemCount: users.length,
@@ -71,10 +72,39 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
             error: (error) => SearchPlaceholder(title: errorMessages[error]!),
           );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );
+    // then return results
+    // final resultsValue = ref.watch(searchResultsProvider);
+    // return resultsValue.when(
+    //   data: (result) {
+    //     print(result);
+    //     return result.when(
+    //       (users) => GridView.builder(
+    //         itemCount: users.length,
+    //         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+    //           maxCrossAxisExtent: 200,
+    //           crossAxisSpacing: 10,
+    //           mainAxisSpacing: 10,
+    //           childAspectRatio: 0.8,
+    //         ),
+    //         itemBuilder: (context, index) {
+    //           return GitHubUserSearchResultTile(
+    //             user: users[index],
+    //             onSelected: (value) => close(context, value),
+    //           );
+    //         },
+    //       ),
+    //       error: (error) => SearchPlaceholder(title: errorMessages[error]!),
+    //     );
+    //   },
+    //   loading: () => const Center(child: CircularProgressIndicator()),
+    //   error: (e, st) => Center(child: Text(e.toString())),
+    // );
   }
 
   @override
