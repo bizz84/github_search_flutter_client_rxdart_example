@@ -6,8 +6,8 @@ import 'package:github_search_flutter_client_rxdart_example/src/models/github_us
 import 'package:github_search_flutter_client_rxdart_example/src/services/github_search_service.dart';
 
 class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
-  GitHubSearchDelegate(this.ref);
-  final WidgetRef ref;
+  GitHubSearchDelegate(this.searchService);
+  final GitHubSearchService searchService;
 
   @override
   Widget buildLeading(BuildContext context) {
@@ -27,7 +27,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
       return Container();
     }
     // search-as-you-type if enabled
-    ref.read(searchServiceProvider).searchUser(query);
+    searchService.searchUser(query);
     return buildMatchingSuggestions(context);
   }
 
@@ -37,74 +37,40 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
       return Container();
     }
     // always search if submitted
-    ref.read(searchServiceProvider).searchUser(query);
+    searchService.searchUser(query);
     return buildMatchingSuggestions(context);
   }
 
   Widget buildMatchingSuggestions(BuildContext context) {
-    final Map<GitHubAPIError, String> errorMessages = {
-      GitHubAPIError.parseError: 'Error reading data from the API',
-      GitHubAPIError.rateLimitExceeded: 'Rate limit exceeded',
-      GitHubAPIError.unknownError: 'Unknown error',
-    };
-    return StreamBuilder<GitHubSearchResult>(
-      stream: ref.read(searchServiceProvider).results,
-      builder: (context, AsyncSnapshot<GitHubSearchResult> snapshot) {
-        if (snapshot.hasData) {
-          final GitHubSearchResult result = snapshot.data!;
-
-          return result.when(
-            (users) => GridView.builder(
-              itemCount: users.length,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.8,
+    return Consumer(
+      builder: (_, ref, __) {
+        final resultsValue = ref.watch(searchResultsProvider);
+        return resultsValue.when(
+          data: (result) {
+            return result.when(
+              (users) => GridView.builder(
+                itemCount: users.length,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.8,
+                ),
+                itemBuilder: (context, index) {
+                  return GitHubUserSearchResultTile(
+                    user: users[index],
+                    onSelected: (value) => close(context, value),
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                return GitHubUserSearchResultTile(
-                  user: users[index],
-                  onSelected: (value) => close(context, value),
-                );
-              },
-            ),
-            error: (error) => SearchPlaceholder(title: errorMessages[error]!),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+              error: (error) => SearchPlaceholder(title: error.message),
+            );
+          },
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, st) => Center(child: Text(e.toString())),
+        );
       },
     );
-    // then return results
-    // final resultsValue = ref.watch(searchResultsProvider);
-    // return resultsValue.when(
-    //   data: (result) {
-    //     print(result);
-    //     return result.when(
-    //       (users) => GridView.builder(
-    //         itemCount: users.length,
-    //         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-    //           maxCrossAxisExtent: 200,
-    //           crossAxisSpacing: 10,
-    //           mainAxisSpacing: 10,
-    //           childAspectRatio: 0.8,
-    //         ),
-    //         itemBuilder: (context, index) {
-    //           return GitHubUserSearchResultTile(
-    //             user: users[index],
-    //             onSelected: (value) => close(context, value),
-    //           );
-    //         },
-    //       ),
-    //       error: (error) => SearchPlaceholder(title: errorMessages[error]!),
-    //     );
-    //   },
-    //   loading: () => const Center(child: CircularProgressIndicator()),
-    //   error: (e, st) => Center(child: Text(e.toString())),
-    // );
   }
 
   @override
