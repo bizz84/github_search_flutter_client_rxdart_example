@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:github_search_flutter_client_rxdart_example/models/github_search_result.dart';
 import 'package:github_search_flutter_client_rxdart_example/models/github_user.dart';
@@ -54,7 +55,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
           return result.when(
             (users) => GridView.builder(
               itemCount: users.length,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
@@ -70,7 +71,7 @@ class GitHubSearchDelegate extends SearchDelegate<GitHubUser?> {
             error: (error) => SearchPlaceholder(title: errorMessages[error]!),
           );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
@@ -108,18 +109,16 @@ class GitHubUserSearchResultTile extends StatelessWidget {
       child: Column(
         children: [
           ClipPath(
-            clipper: ShapeBorderClipper(
+            clipper: const ShapeBorderClipper(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            child: Container(
-              child: Image.network(
-                user.avatarUrl,
-              ),
+            child: CachedNetworkImage(
+              imageUrl: user.avatarUrl,
             ),
           ),
-          SizedBox(height: 8.0),
+          const SizedBox(height: 8.0),
           Text(
             user.login,
             style: theme.textTheme.headline6,
